@@ -1,6 +1,6 @@
 ---
 
-# 📄 **User API Documentation**
+# **User API Documentation**
 
 Base URL: `http://localhost:5000/api/users`
 
