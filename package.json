@@ -2,8 +2,9 @@
   "name": "molments-be",
   "version": "1.0.0",
   "main": "api/index.js",
-"scripts": {
-  "dev": "vercel dev",
+  
+  "scripts": {
+  "dev": "tsx api/index.ts",
   "build": "tsc",
   "start": "node dist/api/index.js"
 },
