@@ -2,12 +2,11 @@
   "name": "molments-be",
   "version": "1.0.0",
   "main": "api/index.js",
-  
   "scripts": {
-  "dev": "tsx api/index.ts",
-  "build": "tsc",
-  "start": "node dist/api/index.js"
-},
+    "dev": "tsx api/index.ts",
+    "build": "tsc",
+    "start": "node dist/api/index.js"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
@@ -17,12 +16,13 @@
     "express": "^5.1.0",
     "mongoose": "^8.18.0",
     "sequelize-mongodb": "^1.0.0",
-    "zod": "^4.1.5"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
+    "@vercel/node": "^5.3.20",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   }
