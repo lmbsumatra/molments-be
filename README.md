@@ -1,6 +1,4 @@
----
-
-# **User API Documentation**
+# **Molments API Documentation**
 
 Base URL: `http://localhost:5000/api/users`
 
