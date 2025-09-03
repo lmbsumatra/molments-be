@@ -20,9 +20,10 @@ Creates a new user in the database.
 
 ```json
 {
-  "name": "John Doe",
+  "username": "John Doe",
   "email": "john@example.com",
-  "age": 30
+  "password": "John@Doe123",
+  "confirmPassword": "John@Doe123"
 }
 ```
 
@@ -30,13 +31,11 @@ Creates a new user in the database.
 
 ```json
 {
-  "_id": "64f9ef1f4d5d2c15e1e8b1a7",
-  "name": "John Doe",
-  "email": "john@example.com",
-  "age": 30,
-  "createdAt": "2025-09-03T12:00:00.000Z",
-  "updatedAt": "2025-09-03T12:00:00.000Z",
-  "__v": 0
+    "username": "John Doe",
+    "email": "john@example.com",
+    "password": "John@Doe123",
+    "_id": "68b7b62154998d488d2c7e59",
+    "__v": 0
 }
 ```
 
@@ -58,15 +57,13 @@ Returns a list of all users.
 
 ```json
 [
-  {
-    "_id": "64f9ef1f4d5d2c15e1e8b1a7",
-    "name": "John Doe",
-    "email": "john@example.com",
-    "age": 30,
-    "createdAt": "2025-09-03T12:00:00.000Z",
-    "updatedAt": "2025-09-03T12:00:00.000Z",
-    "__v": 0
-  }
+    {
+        "_id": "68b7b62154998d488d2c7e59",
+        "username": "John Doe",
+        "email": "john@example.com",
+        "password": "John@Doe123",
+        "__v": 0
+    }
 ]
 ```
 
@@ -94,13 +91,11 @@ Returns a single user by ID.
 
 ```json
 {
-  "_id": "64f9ef1f4d5d2c15e1e8b1a7",
-  "name": "John Doe",
-  "email": "john@example.com",
-  "age": 30,
-  "createdAt": "2025-09-03T12:00:00.000Z",
-  "updatedAt": "2025-09-03T12:00:00.000Z",
-  "__v": 0
+    "_id": "68b7b62154998d488d2c7e59",
+    "username": "John Doe",
+    "email": "john@example.com",
+    "password": "John@Doe123",
+    "__v": 0
 }
 ```
 
@@ -198,24 +193,4 @@ No response body.
 ---
 
 
-##  Ready-to-Copy Sample Payloads
-
-### Create User Payload
-
-```json
-{
-  "name": "Alice",
-  "email": "alice@example.com",
-  "age": 24
-}
-```
-
-### Update User Payload
-
-```json
-{
-  "name": "Alice Updated",
-  "age": 26
-}
-```
 
