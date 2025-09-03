@@ -1,10 +1,10 @@
 {
   "name": "molments-be",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js",
+    "dev": "tsx watch src/api/index.ts",
+    "start": "node dist/api/index.js",
     "build": "tsc"
   },
   "author": "",
