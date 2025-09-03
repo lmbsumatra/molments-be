@@ -1,6 +1,6 @@
 # **Molments API Documentation**
 
-Base URL: `http://localhost:5000/api/users`
+Base URL: `http://localhost:3000`
 
 ---
 
