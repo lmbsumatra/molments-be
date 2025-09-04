@@ -1,5 +1,5 @@
 import { UserModel } from '../models/user.model';
-import type { registerInput } from '../validations/user.schema';
+import type { registerInput } from '../validations/auth.schema';
 
 export async function createUser(data: registerInput) {
   const user = await UserModel.create(data);
