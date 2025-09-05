@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
 
 dotenv.config();
-const secret = process.env.JWT_SECRET || "example"
+const secret = process.env.JWT_SECRET || "secretxexample"
 
 type JwtPayload = {
     userId: string

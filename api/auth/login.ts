@@ -1,12 +1,8 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import dotenv from "dotenv";
 import { UserModel } from "../../src/models/user.model";
 import bcrypt from "bcrypt"
 import { GenerateAccessToken, GenerateRefreshToken } from "../../src/utils/token.util";
 import cookie from "cookie"
-
-dotenv.config();
-const SECRET = process.env.JWT_SECRET || "samplexsecret";
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
     try {
