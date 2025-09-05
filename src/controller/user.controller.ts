@@ -1,8 +1,10 @@
 import { UserModel } from '../models/user.model';
 import type { registerInput } from '../validations/auth.schema';
+import bcrypt from "bcrypt";
 
 export async function createUser(data: registerInput) {
-  const user = await UserModel.create(data);
+  const hashedPassword = bcrypt.hash(data.password, 10)
+  const user = await UserModel.create({ ...data, password: hashedPassword });
   return user;
 }
 
