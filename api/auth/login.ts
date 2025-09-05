@@ -12,7 +12,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Methods", "GET,PUT,DELETE,OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-        
+
         if (req.method !== 'POST') {
             return res.status(500).json({ error: "Method not allowed!" })
         }
@@ -42,27 +42,22 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
         const accessToken = GenerateAccessToken({ userId: user.id })
         const refreshToken = GenerateRefreshToken({ userId: user.id })
 
-        res.setHeader(
-            "Set-Cookie",
+        res.setHeader("Set-Cookie", [
             cookie.serialize("accessToken", accessToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",
                 path: "/",
-                maxAge: 60 * 60 // 1 hour
-            })
-        );
-
-        res.setHeader(
-            "Set-Cookie",
+                maxAge: 60 * 60, // 1 hour
+            }),
             cookie.serialize("refreshToken", refreshToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",
                 path: "/",
-                maxAge: 60 * 60 // 1 hour
-            })
-        );
+                maxAge: 7 * 24 * 60 * 60, // 7 days
+            }),
+        ]);
 
         return res.status(200).json({ message: "Log in successful!" });
 
