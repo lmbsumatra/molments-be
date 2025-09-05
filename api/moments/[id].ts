@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import { connectDB } from "../../src/config/database";
-import { createMoment, getMoments } from "../../src/controller/moment.controller";
+import { createMoment, deleteMoment, getMoment, getMoments, updateMoment } from "../../src/controller/moment.controller";
 import jwt from "jsonwebtoken";
 import { parse } from "cookie";
 
@@ -37,17 +37,30 @@ export default async function (req: VercelRequest, res: VercelResponse) {
 
         const userId = decoded.userId as string;
 
-        switch (req.method) {
-            case "POST":
-                const newMoment = await createMoment({ ...req.body, authorId: userId });
-                return res.status(201).json(newMoment);
+        const { id } = req.query;
 
-            case "GET":
-                const moments = await getMoments(userId);
-                return res.status(200).json(moments);
+        if (!id || typeof id !== 'string') {
+            return res.status(400).json({ error: 'Valid user ID is required' });
+        }
+
+        switch (req.method) {
+            case 'GET':
+                const moment = await getMoment(id, userId);
+                if (!moment) return res.status(404).json({ error: 'Moment not found' });
+                return res.status(200).json(moment);
+
+            case 'PUT':
+                const updatedMoment = await updateMoment(id, req.body, userId);
+                if (!updatedMoment) return res.status(404).json({ error: 'Moment not found' });
+                return res.status(200).json(updatedMoment);
+
+            case 'DELETE':
+                const deletedMoment = await deleteMoment(id, userId);
+                if (!deletedMoment) return res.status(404).json({ error: 'Moment not found' });
+                return res.status(204).send('');
 
             default:
-                return res.status(405).json({ error: "Method not allowed" });
+                return res.status(405).json({ error: 'Method not allowed' });
         }
     } catch (err: any) {
         res.status(500).json({ error: err.message ?? "Internal Server Error" });

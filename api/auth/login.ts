@@ -2,12 +2,13 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import { UserModel } from "../../src/models/user.model";
 import bcrypt from "bcrypt"
 import { GenerateAccessToken, GenerateRefreshToken } from "../../src/utils/token.util";
-import cookie from "cookie"
+import { serialize } from "cookie"
 import { connectDB } from "../../src/config/database";
 
+import dotenv from "dotenv";
+dotenv.config({ path: ".env" });
+
 const handler = async (req: VercelRequest, res: VercelResponse) => {
-
-
     try {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Methods", "GET,PUT,DELETE,OPTIONS");
@@ -43,14 +44,14 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
         const refreshToken = GenerateRefreshToken({ userId: user.id })
 
         res.setHeader("Set-Cookie", [
-            cookie.serialize("accessToken", accessToken, {
+            serialize("accessToken", accessToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",
                 path: "/",
                 maxAge: 60 * 60, // 1 hour
             }),
-            cookie.serialize("refreshToken", refreshToken, {
+            serialize("refreshToken", refreshToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",

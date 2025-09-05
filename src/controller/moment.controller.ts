@@ -10,3 +10,23 @@ export async function createMoment(data: momentInput) {
     const moment = await MomentModel.create(data)
     return moment;
 }
+
+export async function getMoments(data: string) {
+    const moments = await MomentModel.find({ authorId: data });
+    return moments;
+}
+export async function getMoment(id: string, userId: string) {
+    return await MomentModel.findOne({ _id: id, authorId: userId });
+}
+
+export async function updateMoment(id: string, data: Partial<momentInput>, userId: string) {
+    return await MomentModel.findOneAndUpdate(
+        { _id: id, authorId: userId },
+        data,
+        { new: true }
+    );
+}
+
+export async function deleteMoment(id: string, userId: string) {
+    return await MomentModel.findOneAndDelete({ _id: id, authorId: userId });
+}
