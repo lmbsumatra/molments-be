@@ -1,11 +1,22 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import dotenv from "dotenv";
 import cookie from "cookie";
+import { connectDB } from "../../src/config/database";
 
 dotenv.config({ path: ".env" });
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
     try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET,PUT,DELETE,OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+        if (req.method !== 'POST') {
+            return res.status(500).json({ error: "Method not allowed!" })
+        }
+
+        await connectDB();
+
         res.setHeader("Set-Cookie", [
             cookie.serialize("accessToken", "", {
                 httpOnly: true,

@@ -3,12 +3,21 @@ import { UserModel } from "../../src/models/user.model";
 import bcrypt from "bcrypt"
 import { GenerateAccessToken, GenerateRefreshToken } from "../../src/utils/token.util";
 import cookie from "cookie"
+import { connectDB } from "../../src/config/database";
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
+
+
     try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET,PUT,DELETE,OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        
         if (req.method !== 'POST') {
             return res.status(500).json({ error: "Method not allowed!" })
         }
+
+        await connectDB();
 
         const metConditions = []
         if (req.body.username) metConditions.push({ username: req.body.username })
